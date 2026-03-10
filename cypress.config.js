@@ -8,8 +8,13 @@ module.exports = defineConfig({
     baseUrl: "https://demoblaze.com",
 
     setupNodeEvents(on, config) {
+      require("@shelex/cypress-allure-plugin/writer")(on, config);
+      return config;
       // implement node event listeners here
     },
   },
+  env: {
+    allure: true
+  }
 });
 
