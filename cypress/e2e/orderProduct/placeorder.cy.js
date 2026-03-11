@@ -16,17 +16,27 @@ describe("Place Order", () => {
 
   it("order all products", () => {
 
-    cy.visit("/")
 
+    // ADD ALL PRODUCTS
     categories.forEach(item => {
+      cy.visit("/")
 
-      flows.addProductFlow(item.category,item.product)
 
-      orderActions.fillOrderForm(orderData)
-
-      orderActions.purchase()
+      flows.addProductFlow(item.category, item.product)
 
     })
+
+    // GO TO CART
+    //cy.get('#cartur').click()
+    cy.url().should("include", "cart.html")
+    // OPEN ORDER MODAL
+    cy.contains("Place Order").click()
+
+    // FILL ORDER FORM
+    orderActions.fillOrderForm(orderData)
+
+    // PURCHASE
+    orderActions.purchase()
 
   })
 
